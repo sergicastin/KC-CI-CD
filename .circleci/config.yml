@@ -29,7 +29,10 @@ jobs:
           name: Ejecutar linting con pylint
           command: pylint app
       - sonarqube/analyze
-      - gitguardian/scan
+      - gitguardian/scan:
+          name: GitGuardian Scan
+          base_revision: << pipeline.git.base_revision >>
+          revision: << pipeline.git.revision >>
       - run:
           name: Generate artifact
           command: python setup.py sdist
