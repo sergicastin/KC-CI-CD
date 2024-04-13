@@ -1,9 +1,9 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@3.7
+  python: circleci/python@2.1.1
   sonarqube: drift/sonarqube@2.0.6
-  gitguardian: gitguardian/gg-shield@1.0.0
+  gitguardian: gitguardian/ggshield@1.1.4
 
 jobs:
   build:
