@@ -15,13 +15,15 @@ jobs:
           command: |
             pip install coverage pylint pytest
       - run:
-          name: Copy Files to Docker Image
-          command: cp -r . /app ; ls
-          working_directory: /root/project
+          name: Copy files to /app and list contents
+          command: |
+            ls
+            cp -r . /app
+            ls /app
       - run:
           name: Run Tests
-          command: ls ; pytest /app/tests
-          working_directory: /root/project
+          command: pytest /app/tests
+          
       - run:
           name: Generate Coverage Report
           command: coverage report -m
