@@ -15,20 +15,8 @@ jobs:
           command: |
             pip install coverage pylint pytest
       - run:
-          name: Prueba Temp ls
-          command: |
-            ls ; cd tests ; ls
-      - run:
-          name: Prueba Temp cd
-          command: |
-           cd tests
-      - run:
-          name: Prueba Temp ls2
-          command: |
-            ls
-      - run:
           name: Run Tests
-          command: pytest tests
+          command: cd tests ; pytest tests
           working_directory: /app
       - run:
           name: Generate Coverage Report
