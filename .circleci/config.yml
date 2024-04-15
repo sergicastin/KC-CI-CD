@@ -27,7 +27,7 @@ jobs:
           command: |
             pytest /app/tests          
       - run:
-          name: Generate Coverage Report
+          name: Informe de cobertura
           command: |
             coverage run -m pytest tests
             coverage report -m
