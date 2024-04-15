@@ -1,15 +1,12 @@
-import os
 import sys
+import os
 import pytest
 
-# Agregar el directorio 'app' al PYTHONPATH
-current_dir = os.path.dirname(os.path.realpath(__file__))
-app_dir = os.path.join(current_dir, '..', 'app')
-sys.path.append(app_dir)
+# Agregar el directorio raíz del proyecto al sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Importar funciones desde app.py
-from ..app import crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
-
+# Importar las funciones que quieres probar desde app.py
+from app import crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
 
 @pytest.fixture
 def db_connection():
