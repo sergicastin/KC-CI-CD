@@ -20,7 +20,7 @@ jobs:
             ls
       - run:
           name: Run Tests
-          command: pytest tests
+          command: pytest /app/tests
           working_directory: /app
       - run:
           name: Generate Coverage Report
