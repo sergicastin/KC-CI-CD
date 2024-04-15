@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@2.1.1
-  sonarqube: drift/sonarqube@2.0.6
+  sonarcloud: sonarcloud/sonarcloud@1.0.1
 
 jobs:
   build:
@@ -11,31 +11,30 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Dependencias
+          name: Install Dependencies
           command: |
             pip install coverage pylint pytest
           working_directory: /app
-      #- run:
-      #    name: Run tests
-      #    command: pytest
-      #- run:
-      #    name: Generate coverage report
-      #    command: coverage report -m
-      #    working_directory: /app
-      #- run:
-      #    name: Ejecutar linting con pylint
-      #    command: pylint app
-      #    working_directory: /app
-      - sonarqube/analyze
       - run:
-          name: Generate artifact
-          command: python setup.py sdist
+          name: Run Tests
+          command: pytest
+          working_directory: /app
       - run:
-          name: Publish artifact
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              twine upload dist/*
-            fi
+          name: Generate Coverage Report
+          command: coverage report -m
+          working_directory: /app
+      - run:
+          name: Run Linting with pylint
+          command: pylint app
+          working_directory: /app
+      - sonarcloud/scan:
+          organization: "sergicastin"
+          token: "55fa738fc1c02fb5ca14913105d632b9d6508625"
+          projectKey: $CIRCLE_PROJECT_REPONAME
+          projectName: "CI/CD_SergiCastillo"
+          working_directory: /app
+          coverage_report_path: "coverage.xml"
+          sources: "/app"
 
 workflows:
   version: 2
