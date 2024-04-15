@@ -16,7 +16,7 @@ jobs:
             pip install coverage pylint pytest
       - run:
           name: Run Tests
-          command: ls ; pytest /app/tests
+          command: cd.. ; ls ; pytest /app/tests
       - run:
           name: Generate Coverage Report
           command: coverage report -m
