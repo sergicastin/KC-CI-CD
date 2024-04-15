@@ -15,6 +15,10 @@ jobs:
           command: |
             pip install coverage pylint pytest
       - run:
+          name: Install Curl
+          command: |
+            apt install curl
+      - run:
           name: Copy files to /app and list contents
           command: |
             ls
