@@ -23,7 +23,7 @@ jobs:
             touch /app/logs/app.json
       - run:
           name: Run Tests
-          command: pytest /app/tests
+          command: ls ; pytest /app/tests
           
       - run:
           name: Generate Coverage Report
