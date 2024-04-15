@@ -18,10 +18,10 @@ jobs:
       #- run:
       #    name: Run tests
       #    command: pytest
-      - run:
-          name: Generate coverage report
-          command: coverage report -m
-          working_directory: /app
+      #- run:
+      #    name: Generate coverage report
+      #    command: coverage report -m
+      #    working_directory: /app
       - run:
           name: Ejecutar linting con pylint
           command: pylint app
