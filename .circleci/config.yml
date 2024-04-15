@@ -20,7 +20,7 @@ jobs:
             ls
             cp -r . /app
             ls /app
-            touch /logs/app.json
+            touch /app/logs/app.json
       - run:
           name: Run Tests
           command: pytest /app/tests
