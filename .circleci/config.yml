@@ -23,7 +23,8 @@ jobs:
             touch /app/logs/app.json
       - run:
           name: Run Tests
-          command: ls 
+          command: |
+            ls 
             echo "Otro ls"
             ls /app
             pytest /app/tests
