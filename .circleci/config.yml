@@ -28,14 +28,6 @@ jobs:
           command: pylint app
           working_directory: /app
       - sonarcloud/scan:
-          organization: "sergicastin"
-          token: "55fa738fc1c02fb5ca14913105d632b9d6508625"
-          projectKey: $CIRCLE_PROJECT_REPONAME
-          projectName: "CI/CD_SergiCastillo"
-          working_directory: /app
-          coverage_report_path: "coverage.xml"
-          sources: "/app"
-
 workflows:
   version: 2
   build-and-deploy:
