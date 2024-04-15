@@ -10,8 +10,6 @@ jobs:
       - image: sergicasti/practicak8ssergi:latest
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
       - run:
           name: Dependencias
           command: |
