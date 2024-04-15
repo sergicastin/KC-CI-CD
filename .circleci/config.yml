@@ -16,8 +16,7 @@ jobs:
             pip install coverage pylint pytest
       - run:
           name: Run Tests
-          command: ls ; pytest tests
-          working_directory: /app
+          command: pytest /app/tests
       - run:
           name: Generate Coverage Report
           command: coverage report -m
@@ -30,7 +29,10 @@ jobs:
           cache_version: 1
           project_root: /app
           sonar_token_variable_name: "SecToken"
-
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 workflows:
   version: 2
   build-and-deploy:
