@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Dependencias
           command: |
-            pip install coverage pylint
+            pip install coverage pylint pytest
           working_directory: /app
       - run:
           name: Run tests with coverage
