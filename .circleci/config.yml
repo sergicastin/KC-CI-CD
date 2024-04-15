@@ -18,9 +18,13 @@ jobs:
           name: Copy files to /app and list contents
           command: |
             ls
+            mkdir logs
+            touch app.json
+            echo "Otro ls"
+            ls
             cp -r . /app
             ls /app
-            touch /app/logs/app.json
+            
       - run:
           name: Run Tests
           command: |
