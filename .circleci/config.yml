@@ -19,6 +19,14 @@ jobs:
           command: |
             ls ; cd tests ; ls
       - run:
+          name: Prueba Temp cd
+          command: |
+           cd tests
+      - run:
+          name: Prueba Temp ls2
+          command: |
+            ls
+      - run:
           name: Run Tests
           command: pytest tests
           working_directory: /app
