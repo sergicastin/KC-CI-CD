@@ -1,26 +1,23 @@
-import sys
 import os
-import pytest
+import logging
 
-# Agregar el directorio raíz del proyecto al sys.path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Definir la ruta del archivo de registro
+log_file_path = '/app/logs/app.json'
 
-# Importar las funciones que quieres probar desde app.py
-from app import crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
+# Crear el manejador de logs
+log_handler = logging.FileHandler(log_file_path)
 
-@pytest.fixture
-def db_connection():
-    connection = None
-    return connection
+# Configurar el formato del log
+log_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+log_handler.setFormatter(log_formatter)
 
-def test_crear_tabla(db_connection):
-    crear_tabla()
+# Configurar el nivel de registro
+log_handler.setLevel(logging.DEBUG)
 
-def test_agregar_practica(db_connection):
-    agregar_practica("Test Práctica", "test@example.com", "Test", "http://example.com")
+# Crear un objeto logger
+logger = logging.getLogger(__name__)
+logger.addHandler(log_handler)
+logger.setLevel(logging.DEBUG)
 
-def test_obtener_practicas(db_connection):
-    practicas = obtener_practicas()
-
-def test_eliminar_practica(db_connection):
-    eliminar_practica(1)
+# Ejemplo de registro
+logger.info('Este es un mensaje de ejemplo')
