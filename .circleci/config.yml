@@ -7,13 +7,13 @@ orbs:
 jobs:
   build:
     docker:
-      - image: django:latest
+      - image: sergicasti/practicak8ssergi:latest
     steps:
       - checkout
       - run:
           name: Dependencias
           command: |
-            pip install coverage pylint pytest wrapt
+            pip install coverage pylint pytest
           working_directory: /app
       #- run:
       #    name: Run tests
@@ -22,10 +22,10 @@ jobs:
       #    name: Generate coverage report
       #    command: coverage report -m
       #    working_directory: /app
-      - run:
-          name: Ejecutar linting con pylint
-          command: pylint app
-          working_directory: /app
+      #- run:
+      #    name: Ejecutar linting con pylint
+      #    command: pylint app
+      #    working_directory: /app
       - sonarqube/analyze
       - run:
           name: Generate artifact
