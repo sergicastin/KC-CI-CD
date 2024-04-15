@@ -15,6 +15,10 @@ jobs:
           command: |
             pip install coverage pylint pytest
       - run:
+          name: Show Project Structure
+          command: |
+            ls -R
+      - run:
           name: Run Tests
           command:  ls ; touch tests/__init__.py ; pytest tests
           
