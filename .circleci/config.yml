@@ -28,7 +28,9 @@ jobs:
             pytest /app/tests          
       - run:
           name: Generate Coverage Report
-          command: coverage report -m
+          command: |
+            coverage run -m pytest tests
+            coverage report -m
           working_directory: /app
       - run:
           name: Run Linting with pylint
