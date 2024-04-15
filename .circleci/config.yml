@@ -20,19 +20,12 @@ jobs:
             ls
             mkdir logs
             touch app.json
-            echo "Otro ls"
-            ls
             cp -r . /app
-            ls /app
-            
+            ls /app            
       - run:
           name: Run Tests
           command: |
-            ls 
-            echo "Otro ls"
-            ls /app
-            pytest /app/tests
-          
+            pytest /app/tests          
       - run:
           name: Generate Coverage Report
           command: coverage report -m
