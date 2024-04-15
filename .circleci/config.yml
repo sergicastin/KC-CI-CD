@@ -18,7 +18,7 @@ jobs:
           name: Install Curl
           command: |
             apt-get update
-            apt-get install -y curl
+            apt-get install -y curl unzip
       - run:
           name: Copy files to /app and list contents
           command: |
