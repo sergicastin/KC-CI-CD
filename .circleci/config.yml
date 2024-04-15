@@ -9,14 +9,19 @@ jobs:
     docker:
       - image: sergicasti/practicak8ssergi:latest
     steps:
-      - checkout
+      - checkout      
       - run:
           name: Install Dependencies
           command: |
             pip install coverage pylint pytest
       - run:
+          name: Copy Files to Docker Image
+          command: cp -r . /app
+          working_directory: /root/project
+      - run:
           name: Run Tests
-          command: cd.. ; ls ; pytest /app/tests
+          command: ls ; pytest /app/tests
+          working_directory: /root/project
       - run:
           name: Generate Coverage Report
           command: coverage report -m
@@ -29,10 +34,7 @@ jobs:
           cache_version: 1
           project_root: /app
           sonar_token_variable_name: "SecToken"
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
+
 workflows:
   version: 2
   build-and-deploy:
