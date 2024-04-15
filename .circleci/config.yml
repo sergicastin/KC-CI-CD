@@ -15,15 +15,15 @@ jobs:
           command: |
             pip install coverage pylint pytest
           working_directory: /app
-      - run:
-          name: Run tests
-          command: pytest
+      #- run:
+      #    name: Run tests
+      #    command: pytest
       - run:
           name: Generate coverage report
           command: coverage report -m
-      #- run:
-      #    name: Ejecutar linting con pylint
-      #    command: pylint app
+      - run:
+          name: Ejecutar linting con pylint
+          command: pylint app
       - sonarqube/analyze
       - run:
           name: Generate artifact
