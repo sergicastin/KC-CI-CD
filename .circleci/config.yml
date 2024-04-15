@@ -16,7 +16,7 @@ jobs:
             pip install coverage pylint pytest
       - run:
           name: Copy Files to Docker Image
-          command: cp -r . /app
+          command: cp -r . /app ; ls
           working_directory: /root/project
       - run:
           name: Run Tests
