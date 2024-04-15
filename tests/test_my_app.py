@@ -8,7 +8,8 @@ app_dir = os.path.join(current_dir, '..', 'app')
 sys.path.append(app_dir)
 
 # Importar funciones desde app.py
-from app import crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
+from ..app import crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
+
 
 @pytest.fixture
 def db_connection():
