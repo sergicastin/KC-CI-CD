@@ -9,18 +9,18 @@ jobs:
     docker:
       - image: sergicasti/practicak8ssergi:latest
     steps:
-      - checkout
-      - run:
-          name: Prueba Temp ls
-          command: |
-            ls
+      - checkout      
       - run:
           name: Install Dependencies
           command: |
             pip install coverage pylint pytest
       - run:
+          name: Prueba Temp ls
+          command: |
+            ls
+      - run:
           name: Run Tests
-          command: pytest tests/
+          command: pytest tests
           working_directory: /app
       - run:
           name: Generate Coverage Report
