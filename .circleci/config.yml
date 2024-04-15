@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   python: circleci/python@2.1.1
   sonarqube: drift/sonarqube@2.0.6
-  snyk: snyk/snyk@1.2.0
 
 jobs:
   build:
@@ -29,10 +28,6 @@ jobs:
           name: Ejecutar linting con pylint
           command: pylint app
       - sonarqube/analyze
-      - snyk/scan:
-          name: Snyk Scan
-          base_revision: << pipeline.git.base_revision >>
-          revision: << pipeline.git.revision >>
 
       - run:
           name: Generate artifact
