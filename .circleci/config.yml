@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: sergicasti/practicak8ssergi:latest
+      - image: django:latest
     steps:
       - checkout
       - run:
