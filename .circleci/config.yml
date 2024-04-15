@@ -21,9 +21,11 @@ jobs:
       - run:
           name: Generate coverage report
           command: coverage report -m
+          working_directory: /app
       - run:
           name: Ejecutar linting con pylint
           command: pylint app
+          working_directory: /app
       - sonarqube/analyze
       - run:
           name: Generate artifact
