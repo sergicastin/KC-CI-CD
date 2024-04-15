@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - python/install-packages:
-        pkg-manager: pip
+          pkg-manager: pip
       - run:
           name: Dependencias
           command: |
