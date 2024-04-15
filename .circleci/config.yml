@@ -17,10 +17,10 @@ jobs:
       - run:
           name: Prueba Temp ls
           command: |
-            ls
+            ls ; cd tests ; ls
       - run:
           name: Run Tests
-          command: pytest /app/tests
+          command: pytest tests
           working_directory: /app
       - run:
           name: Generate Coverage Report
