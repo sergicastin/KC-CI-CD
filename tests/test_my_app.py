@@ -1,5 +1,14 @@
+import os
+import sys
 import pytest
-from my_app import crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
+
+# Agregar el directorio 'app' al PYTHONPATH
+current_dir = os.path.dirname(os.path.realpath(__file__))
+app_dir = os.path.join(current_dir, '..', 'app')
+sys.path.append(app_dir)
+
+# Importar funciones desde app.py
+from app import crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
 
 @pytest.fixture
 def db_connection():
