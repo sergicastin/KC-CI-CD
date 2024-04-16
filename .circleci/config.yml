@@ -17,6 +17,7 @@ jobs:
       - run:
           name: Install Curl
           command: |
+            add-apt-repository ppa:openjdk-r/ppa
             apt-get update
             apt-get install -y curl unzip openjdk-11-jdk
       - run:
