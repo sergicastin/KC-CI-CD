@@ -43,8 +43,6 @@ jobs:
           command: pylint app
           working_directory: /app
       - sonarcloud/scan:
-          project_root: /app
-
 workflows:
   version: 2
   build-and-deploy:
