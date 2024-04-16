@@ -3,14 +3,14 @@ version: 2.1
 orbs:
   python: circleci/python@2.1.1
   sonarcloud: sonarsource/sonarcloud@2.0.0
-  snyk: snyk/snyk@2.1.0
+  gitguardian: gitguardian/gg-action@1.0.0
 
 jobs:
   build:
     docker:
       - image: sergicasti/practicak8ssergi:latest
     environment:
-      SNYK_TOKEN: d21432a5-90c7-4e73-99c5-964ec971ee75
+      GITHUB_TOKEN: 9d30a49ed7F8DdBEd610fb3E0e6dd8becf9CAD1607D86fbE22de8ea1ecf6d8A167B23Fd
     steps:
       - checkout      
       - run:
@@ -48,11 +48,4 @@ jobs:
           cache_version: 1
           project_root: /app
           sonar_token_variable_name: "SONAR_TOKEN"
-      - snyk/scan:
-          project_root: /app
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
+      - gitguardian/scan:
