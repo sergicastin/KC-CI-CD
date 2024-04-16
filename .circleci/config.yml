@@ -7,8 +7,8 @@ orbs:
 
 jobs:
   build:
-    machine:
-      enabled: true
+    docker:
+      - image: sergicasti/practicak8ssergi:latest
     steps:
       - checkout      
       - run:
@@ -18,8 +18,8 @@ jobs:
       - run:
           name: Install Curl
           command: |
-            sudo apt-get update
-            sudo apt-get install -y curl unzip default-jre
+            apt-get update
+            apt-get install -y curl unzip default-jre sudo
       - run:
           name: Copy files to /app and list contents
           command: |
