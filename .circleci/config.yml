@@ -9,6 +9,8 @@ jobs:
   build:
     docker:
       - image: sergicasti/practicak8ssergi:latest
+    environment:
+      SNYK_TOKEN: d21432a5-90c7-4e73-99c5-964ec971ee75
     steps:
       - checkout      
       - run:
