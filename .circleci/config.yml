@@ -44,7 +44,7 @@ jobs:
       - sonarcloud/scan:
           cache_version: 1
           project_root: /app
-          sonar_token_variable_name: "SecToken"
+          sonar_token_variable_name: "SONAR_TOKEN"
 
 workflows:
   version: 2
