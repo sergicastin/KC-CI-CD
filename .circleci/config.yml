@@ -49,7 +49,7 @@ jobs:
           project_root: /app
           sonar_token_variable_name: "SONAR_TOKEN"
       - snyk/scan:
-          working_directory: /app
+          project_root: /app
 
 workflows:
   version: 2
