@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   python: circleci/python@2.1.1
   sonarcloud: sonarsource/sonarcloud@2.0.0
+  snyk: snyk/snyk@2.1.0
 
 jobs:
   build:
@@ -44,7 +45,8 @@ jobs:
       - sonarcloud/scan:
           cache_version: 1
           project_root: /app
-          sonar_token_variable_name: "SONAR_TOKEN"                 
+          sonar_token_variable_name: "SONAR_TOKEN"
+      - snyk/scan            
 
 workflows:
   version: 2
