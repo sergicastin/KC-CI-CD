@@ -9,7 +9,7 @@ jobs:
     docker:
       - image: sergicasti/practicak8ssergi:latest
     steps:
-      - checkout
+      - checkout      
       - run:
           name: Install Dependencies
           command: |
@@ -26,12 +26,11 @@ jobs:
             mkdir logs
             touch app.json
             cp -r . /app
-            ls
-            ls /app
+            ls /app            
       - run:
           name: Run Tests
           command: |
-            pytest /app/tests
+            pytest /app/tests          
       - run:
           name: Informe de cobertura
           command: |
@@ -43,8 +42,10 @@ jobs:
           command: pylint app
           working_directory: /app
       - sonarcloud/scan:
-          context: sonarcloud
-          
+          cache_version: 1
+          project_root: /app
+          sonar_token_variable_name: "SONAR_TOKEN"
+
 workflows:
   version: 2
   build-and-deploy:
