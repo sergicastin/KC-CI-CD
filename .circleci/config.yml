@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Run Tests
           command: |
-            pytest /app/tests
+            pytest tests
       - run:
           name: Informe de cobertura
           command: |
