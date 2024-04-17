@@ -5,12 +5,6 @@ import psycopg2
 import json_log_formatter
 import time
 
-# Cargar las variables de entorno desde el archivo JSON
-with open('secret.json') as secret_file:
-    config = json.load(secret_file)
-    for key, value in config.items():
-        os.environ[key] = value
-
 app = Flask(__name__)
 
 time.sleep(5)
@@ -19,21 +13,14 @@ time.sleep(5)
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 
-# Configuramos el formatter para que los logs sean en formato JSON
-formatter = json_log_formatter.JSONFormatter()
-
-# Configuramos el manejador de archivos de logs en formato JSON
-log_handler = logging.FileHandler(os.path.join(os.getcwd(), 'logs', 'app.json'))
-log_handler.setFormatter(formatter)
-log.addHandler(log_handler)
-
 # Configuración de la conexión a la base de datos
 configuracion_bd = {
-    'host': os.environ.get('DATABASE_HOST'),
-    'user': os.environ.get('DATABASE_USER'),
-    'password': os.environ.get('DATABASE_PASSWORD'),
-    'database': os.environ.get('DATABASE_NAME'),
-    'port': int(os.environ.get('DATABASE_PORT')),
+    'host': os.environ.get('horton.db.elephantsql.com'),
+    'user': os.environ.get('rdbwaqch'),
+    'password': os.environ.get('9D7TdjSABEPEzjrMxMJtLv5kYe9jYYIY'),
+    'database': os.environ.get('sergicastindb'),
+    'port': int(os.environ.get('DATABASE_PORT', '5432'))
+
 }
 
 def crear_tabla():

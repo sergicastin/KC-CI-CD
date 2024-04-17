@@ -1,6 +1,27 @@
 import os
 import pytest
+import sys
+import json
+
+# Obtener la ruta al directorio 'app' (un nivel hacia arriba desde la ubicación de este archivo)
+app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'app'))
+
+# Agregar el directorio 'app' al sys.path
+sys.path.insert(0, app_path)
+
+# Ahora puedes importar 'app.py' desde el directorio 'app'
 from app import app, crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
+
+# Obtener la ruta completa al archivo 'secret.json' dentro del directorio 'app'
+secret_path = os.path.abspath(os.path.join(app_path, 'secret.json'))
+
+print("Ruta esperada para secret.json:", secret_path)
+
+# Cargar las variables de entorno desde el archivo JSON
+with open(secret_path) as secret_file:
+    config = json.load(secret_file)
+    for key, value in config.items():
+        os.environ[key] = value
 
 @pytest.fixture
 def client():
