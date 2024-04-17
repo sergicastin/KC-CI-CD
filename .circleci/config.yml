@@ -26,7 +26,7 @@ jobs:
                 "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
             sudo apt-get update
             sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-            sudo service docker start
+            sudo /etc/init.d/docker start
       - run:
           name: Check Docker version
           command: docker --version && docker info
