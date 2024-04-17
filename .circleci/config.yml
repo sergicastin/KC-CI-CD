@@ -23,9 +23,7 @@ jobs:
       - run:
           name: Copy files to /app and list contents
           command: |
-            mkdir logs
-            touch app.json
-            cp -r . /app
+            ls
       - run:
           name: Run Tests
           command: |
