@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: sergicasti/practicak8ssergi:latest
     steps:
-      - checkout 
+      - checkout
       - run:
           name: Install Dependencies
           command: |
@@ -25,11 +25,11 @@ jobs:
           command: |
             mkdir logs
             touch app.json
-            cp -r . /app      
+            cp -r. /app
       - run:
           name: Run Tests
           command: |
-            pytest /app/tests          
+            pytest /app/tests
       - run:
           name: Informe de cobertura
           command: |
@@ -49,6 +49,10 @@ jobs:
           name: GitGuardian Scan
           command:
             ggshield secret scan commit-range HEAD
+      - store_artifacts:
+          path: /app/artifacts
+          destination: artifacts
+
 workflows:
   version: 2
   build-and-deploy:
