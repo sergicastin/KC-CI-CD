@@ -25,7 +25,7 @@ jobs:
           command: |
             mkdir logs
             touch app.json
-            cp -r. /app
+            cp -r . /app
       - run:
           name: Run Tests
           command: |
