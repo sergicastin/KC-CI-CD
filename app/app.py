@@ -5,6 +5,12 @@ import psycopg2
 import json_log_formatter
 import time
 
+# Cargar las variables de entorno desde el archivo JSON
+with open('secret.json') as secret_file:
+    config = json.load(secret_file)
+    for key, value in config.items():
+        os.environ[key] = value
+
 app = Flask(__name__)
 
 time.sleep(5)
