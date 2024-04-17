@@ -48,8 +48,8 @@ jobs:
           command:
             ggshield secret scan commit-range HEAD
       - store_artifacts:
-          path: /app/artifacts
-          destination: artifacts
+          path: coverage_report.txt
+          destination: coverage-reports
 
 workflows:
   version: 2
