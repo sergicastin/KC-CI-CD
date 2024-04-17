@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: sergicasti/practicak8ssergi:latest
     environment:
-      GITHUB_TOKEN: 9d30a49ed7F8DdBEd610fb3E0e6dd8becf9CAD1607D86fbE22de8ea1ecf6d8A167B23Fd
+
     steps:
       - checkout      
       - run:
