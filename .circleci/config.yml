@@ -12,6 +12,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Restart Docker service
+          command: sudo service docker restart
+      - run:
           name: Check Docker version
           command: docker --version && docker info
       - run:
