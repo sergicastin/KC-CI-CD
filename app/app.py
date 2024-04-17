@@ -2,6 +2,7 @@ import logging
 import os
 from flask import Flask, render_template, request, redirect
 import psycopg2
+import psycopg2.extras
 import json_log_formatter
 import time
 
@@ -20,7 +21,6 @@ configuracion_bd = {
     'password': os.environ.get('9D7TdjSABEPEzjrMxMJtLv5kYe9jYYIY'),
     'database': os.environ.get('sergicastindb'),
     'port': int(os.environ.get('DATABASE_PORT', '5432'))
-
 }
 
 def crear_tabla():
@@ -52,10 +52,10 @@ def agregar_practica(nombre, correo, categoria, link):
 def obtener_practicas():
     try:
         conexion = psycopg2.connect(**configuracion_bd)
-        cursor = conexion.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM practicas")
-        practicas = cursor.fetchall()
-        return practicas
+        with conexion.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+            cursor.execute("SELECT * FROM practicas")
+            practicas = cursor.fetchall()
+            return practicas
     except Exception as e:
         log.error({"message": f"Error al obtener prácticas: {e}"})
         return []
@@ -97,6 +97,3 @@ def agregar():
 def eliminar(practica_id):
     eliminar_practica(practica_id)
     return redirect('/')
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
