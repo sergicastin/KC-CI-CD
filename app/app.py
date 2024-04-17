@@ -1,7 +1,7 @@
 import logging
 import os
 from flask import Flask, render_template, request, redirect
-import mysql.connector
+import psycopg2
 import json_log_formatter
 import time
 
@@ -32,9 +32,9 @@ configuracion_bd = {
 
 def crear_tabla():
     try:
-        conexion = mysql.connector.connect(**configuracion_bd)
+        conexion = psycopg2.connect(**configuracion_bd)
         cursor = conexion.cursor()
-        cursor.execute("CREATE TABLE IF NOT EXISTS practicas (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(255), correo VARCHAR(255), categoria VARCHAR(255), link VARCHAR(255))")
+        cursor.execute("CREATE TABLE IF NOT EXISTS practicas (id SERIAL PRIMARY KEY, nombre VARCHAR(255), correo VARCHAR(255), categoria VARCHAR(255), link VARCHAR(255))")
         conexion.commit()
         log.info("Tabla creada correctamente")
     except Exception as e:
@@ -45,7 +45,7 @@ def crear_tabla():
 
 def agregar_practica(nombre, correo, categoria, link):
     try:
-        conexion = mysql.connector.connect(**configuracion_bd)
+        conexion = psycopg2.connect(**configuracion_bd)
         cursor = conexion.cursor()
         cursor.execute("INSERT INTO practicas (nombre, correo, categoria, link) VALUES (%s, %s, %s, %s)", (nombre, correo, categoria, link))
         conexion.commit()
@@ -58,7 +58,7 @@ def agregar_practica(nombre, correo, categoria, link):
 
 def obtener_practicas():
     try:
-        conexion = mysql.connector.connect(**configuracion_bd)
+        conexion = psycopg2.connect(**configuracion_bd)
         cursor = conexion.cursor(dictionary=True)
         cursor.execute("SELECT * FROM practicas")
         practicas = cursor.fetchall()
@@ -72,7 +72,7 @@ def obtener_practicas():
 
 def eliminar_practica(practica_id):
     try:
-        conexion = mysql.connector.connect(**configuracion_bd)
+        conexion = psycopg2.connect(**configuracion_bd)
         cursor = conexion.cursor()
         cursor.execute("DELETE FROM practicas WHERE id = %s", (practica_id,))
         conexion.commit()
