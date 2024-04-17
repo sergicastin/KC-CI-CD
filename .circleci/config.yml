@@ -12,6 +12,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Check Docker version
+          command: docker --version && docker info
+      - run:
           name: Build Docker image
           command: |
             cd docker-sergi-main
