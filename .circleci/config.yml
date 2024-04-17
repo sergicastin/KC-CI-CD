@@ -8,9 +8,13 @@ orbs:
 jobs:
   build:
     docker:
-      - image: sergicasti/practicak8ssergi:latest
+      - image: circleci/python:3.8
     steps:
       - checkout
+      - run:
+          name: Build Docker image
+          command: |
+            docker build -t ci/cd_app_sergi:latest .
       - run:
           name: Install Dependencies
           command: |
@@ -18,8 +22,8 @@ jobs:
       - run:
           name: Install Curl
           command: |
-            apt-get update
-            apt-get install -y curl unzip default-jre sudo git
+            sudo apt-get update
+            sudo apt-get install -y curl unzip default-jre sudo git
       - run:
           name: Copy files to /app and list contents
           command: |
