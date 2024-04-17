@@ -31,8 +31,8 @@ jobs:
       - run:
           name: Informe de cobertura
           command: |
-            coverage run -m pytest tests
-            coverage report -m
+            sudo coverage run -m pytest tests
+            sudo coverage report -m
           working_directory: /app
       - run:
           name: Run Linting with pylint
