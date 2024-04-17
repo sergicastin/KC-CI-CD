@@ -3,7 +3,6 @@ import os
 from flask import Flask, render_template, request, redirect
 import psycopg2
 import psycopg2.extras
-import json_log_formatter
 import time
 
 app = Flask(__name__)
