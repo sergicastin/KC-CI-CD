@@ -33,7 +33,6 @@ jobs:
           command: |
             sudo coverage run -m pytest tests
             sudo coverage report -m
-          working_directory: /app
       - run:
           name: Run Linting with pylint
           command: pylint app
