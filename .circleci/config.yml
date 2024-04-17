@@ -14,8 +14,8 @@ jobs:
       - run:
           name: Build Docker image
           command: |
+            cd ../docker-sergi-main
             docker build -t ci/cd_app_sergi:latest .
-            working_directory: /docker-sergi-main
       - run:
           name: Install Dependencies
           command: |
