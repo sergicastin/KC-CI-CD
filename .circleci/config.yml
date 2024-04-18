@@ -74,12 +74,13 @@ jobs:
           command: |
             pip install twine
 
-      # Subir el paquete a PyPI
       - run:
-          name: Upload Package to PyPI
+          name: Subir paquete a PyPI
           command: |
-            python3 -m twine upload --repository CI-CD-SergiCastillo dist/*
-            python setup.py sdist upload -r pypi
+            # Obtener el token de PyPI desde la variable de entorno
+            pypi_key=$PYPI_KEY
+            # Utilizar el token para subir el paquete a PyPI con twine
+            python3 -m twine upload --repository CI-CD-SergiCastillo dist/* -u __token__ -p "$pypi_key"
 
 workflows:
   version: 2
