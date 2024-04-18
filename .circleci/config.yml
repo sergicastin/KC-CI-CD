@@ -65,15 +65,21 @@ jobs:
           path: dist
           destination: pypi_package
 
+      # Persistir el directorio 'dist' al espacio de trabajo
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+
 
   deploy:
     docker:
       - image: cimg/python:3.8.4
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - pypi-package-{{ .Branch }}-{{ .Revision }}
+      # Adjuntar el espacio de trabajo para acceder al directorio 'dist'
+      - attach_workspace:
+          at: .
 
       # Instalar twine para subir el paquete a PyPI
       - run:
