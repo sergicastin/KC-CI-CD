@@ -1,3 +1,4 @@
 git flow
 circleci
 sonarcloud
+gitguardian
