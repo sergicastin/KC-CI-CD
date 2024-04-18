@@ -78,7 +78,7 @@ jobs:
           name: Subir paquete a PyPI
           command: |
             pypi_key=$PYPI_KEY
-            twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password $pypi_key *
+            twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" *            
 
 workflows:
   version: 2
