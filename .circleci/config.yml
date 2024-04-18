@@ -89,13 +89,12 @@ jobs:
             echo "El token de PyPI es: $PYPI_KEY"
             twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" dist/*
             ls
-            
+
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
-      - deploy:
+      - build:
           requires:
             - build
           filters:
