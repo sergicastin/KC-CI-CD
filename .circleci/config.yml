@@ -77,8 +77,8 @@ jobs:
           name: Build Docker image
           command: |
             cd ..
-            docker build -t CI-CD-SergiCastillo -f dockerfile CI-CD-SergiCastillo
-            docker tag CI-CD-SergiCastillo CI-CD-SergiCastillo:latest
+            docker build -t ci-cd-sergicastillo -f dockerfile CI-CD-SergiCastillo
+            docker tag ci-cd-sergicastillo ci-cd-sergicastillo:latest
             docker images
 
 workflows:
