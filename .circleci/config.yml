@@ -83,6 +83,8 @@ jobs:
             sudo apt-get install -y docker.io
             sudo usermod -aG docker $USER
             docker --version
+            sudo systemctl start docker
+
       - run:
           name: Build Docker image
           command: |    
