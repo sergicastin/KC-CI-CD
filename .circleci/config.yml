@@ -1,5 +1,10 @@
 version: 2.1
 
+orbs:
+  python: circleci/python@2.1.1
+  sonarcloud: sonarsource/sonarcloud@2.0.0
+  ggshield: gitguardian/ggshield@1.1.4
+
 executors:
   docker-executor:
     docker:
@@ -7,9 +12,10 @@ executors:
 
 jobs:
   build:
-    executor: docker-executor
+    docker:
+      - image: cimg/python:3.8.4
     steps:
-      - checkout
+      - checkout            
       - run:
           name: Instalar dependencias
           command: |
@@ -66,11 +72,23 @@ jobs:
             twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" dist/*
 
   build_docker_image:
+    description: "Build Docker image"
     executor: docker-executor
     steps:
       - checkout
       - attach_workspace:
           at: .
+      - run:
+          name: Install Docker
+          command: |
+            sudo apt-get remove -y containerd.io
+            sudo apt-get autoremove -y
+            sudo apt-get update
+            sudo apt-get install -f
+            sudo apt-get install -y docker.io
+            sudo usermod -aG docker $USER
+            docker --version
+            sudo systemctl start docker
       - run:
           name: Build Docker image
           command: |    
