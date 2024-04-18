@@ -76,7 +76,10 @@ jobs:
       - run:
           name: Install Docker
           command: |
+            sudo apt-get remove -y containerd.io
+            sudo apt-get autoremove -y
             sudo apt-get update
+            sudo apt-get install -f
             sudo apt-get install -y docker.io
             sudo usermod -aG docker $USER
             docker --version
