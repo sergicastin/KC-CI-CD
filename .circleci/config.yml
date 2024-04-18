@@ -52,6 +52,13 @@ jobs:
           name: Build PyPI Package
           command: |
             python setup.py sdist
+      
+      # Listar los contenidos de 'dist'
+      - run:
+          name: List Contents of Dist
+          command: |
+            echo "Contenido de 'dist':"
+            ls dist
 
       # Guardar el paquete generado como artefacto
       - store_artifacts:
