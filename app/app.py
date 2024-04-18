@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect
 import psycopg2
 import psycopg2.extras
 import time
+import json
 
 app = Flask(__name__)
 
@@ -12,15 +13,22 @@ time.sleep(5)
 # Configuración del logger
 log = logging.getLogger()
 log.setLevel(logging.INFO)
+# Ruta al archivo JSON
+secret_path = 'secret.json'  # Puedes ajustar la ruta según sea necesario
 
-# Configuración de la conexión a la base de datos
+# Cargar las variables secretas desde el archivo JSON
+with open(secret_path) as secret_file:
+    config = json.load(secret_file)
+
+# Configuración de la base de datos
 configuracion_bd = {
-    'host': os.environ.get('horton.db.elephantsql.com'),
-    'user': os.environ.get('rdbwaqch'),
-    'password': os.environ.get('9D7TdjSABEPEzjrMxMJtLv5kYe9jYYIY'),
-    'database': os.environ.get('sergicastindb'),
-    'port': int(os.environ.get('DATABASE_PORT', '5432'))
+    'host': config['host'],
+    'user': config['user'],
+    'password': config['password'],
+    'database': config['database'],
+    'port': config.get('port', 5432)  # Usar el valor predeterminado 5432 si el puerto no está definido en el archivo JSON
 }
+
 
 def crear_tabla():
     try:
