@@ -21,10 +21,6 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y curl unzip default-jre sudo git
       - run:
-          name: Copy files to /app and list contents
-          command: |
-            ls
-      - run:
           name: Run Tests
           command: |
             pytest tests
@@ -47,49 +43,28 @@ jobs:
           name: GitGuardian Scan
           command:
             ggshield secret scan commit-range HEAD
-      # Generar paquete PyPI
       - run:
           name: Build PyPI Package
           command: |
             python setup.py sdist
-      
-      # Listar los contenidos de 'dist'
-      - run:
-          name: List Contents of Dist
-          command: |
-            echo "Contenido de 'dist':"
-            ls dist
-
-      # Guardar el paquete generado como artefacto
       - store_artifacts:
           path: dist
           destination: pypi_package
-
-      # Persistir el directorio 'dist' al espacio de trabajo
       - persist_to_workspace:
           root: .
           paths:
             - dist
-
-      # Adjuntar el espacio de trabajo para acceder al directorio 'dist'
       - attach_workspace:
           at: .
-
-      # Instalar twine para subir el paquete a PyPI
       - run:
           name: Install Twine
           command: |
             pip install twine
-
       - run:
           name: Subir paquete a PyPI
           command: |
-            set -x  # Habilitar el modo de depuración
             pypi_key="$PYPI_KEY"
-            echo "El token de PyPI es: $PYPI_KEY"
             twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" dist/*
-            ls
-
 workflows:
   version: 2
   build-and-deploy:
