@@ -18,7 +18,7 @@ log.setLevel(logging.INFO)
 app_dir = os.path.abspath(os.path.dirname(__file__))
 
 # Ruta al archivo JSON
-secret_path = os.path.join(app_dir, 'secret.json')
+secret_path = os.path.join(app_dir, '..', 'tests', 'secret.json')
 
 # Cargar las variables secretas desde el archivo JSON
 with open(secret_path) as secret_file:
