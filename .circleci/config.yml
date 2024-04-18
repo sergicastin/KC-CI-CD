@@ -79,6 +79,7 @@ jobs:
           command: |
             pypi_key=$PYPI_KEY
             twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" *
+            ls
             echo "El token de PyPI es: $PYPI_KEY"
 
 workflows:
