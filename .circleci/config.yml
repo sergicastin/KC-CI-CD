@@ -76,7 +76,6 @@ jobs:
       - run:
           name: Build Docker image
           command: |    
-            apk add docker-cli
             docker build -t ci-cd-sergicastillo -f dockerfile .
             docker tag ci-cd-sergicastillo ci-cd-sergicastillo:latest
             docker images
