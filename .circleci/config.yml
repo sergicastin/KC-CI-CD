@@ -80,7 +80,7 @@ jobs:
             # Obtener el token de PyPI desde la variable de entorno
             pypi_key=$PYPI_KEY
             # Utilizar el token para subir el paquete a PyPI con twine
-            python3 -m twine upload --repository CI-CD-SergiCastillo dist/* -u __token__ -p "$pypi_key"
+            python3 -m twine upload --repository CI-CD-SergiCastillo * -u __token__ -p "$pypi_key"
 
 workflows:
   version: 2
