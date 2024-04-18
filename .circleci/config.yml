@@ -85,6 +85,7 @@ jobs:
             docker build -t ci-cd-sergicastillo -f dockerfile .
             docker tag ci-cd-sergicastillo ci-cd-sergicastillo:latest
             docker images
+            ls
 
 workflows:
   version: 2
