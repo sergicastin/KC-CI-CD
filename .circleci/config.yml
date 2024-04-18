@@ -67,8 +67,8 @@ jobs:
             twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" dist/*
 
   build_docker_image:
-    machine:
-      image: ubuntu-2204:2022.04.2
+    docker:
+      - image: cimg/base:2022.09
     steps:
       - checkout
       - attach_workspace:
