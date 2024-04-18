@@ -77,10 +77,8 @@ jobs:
       - run:
           name: Subir paquete a PyPI
           command: |
-            # Obtener el token de PyPI desde la variable de entorno
             pypi_key=$PYPI_KEY
-            # Utilizar el token para subir el paquete a PyPI con twine
-            python3 -m twine upload --repository CI-CD-SergiCastillo * -u __token__ -p "$pypi_key"
+            twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password pypi_key *
 
 workflows:
   version: 2
