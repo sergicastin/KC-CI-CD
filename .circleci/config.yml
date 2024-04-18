@@ -66,6 +66,12 @@ jobs:
           path: dist
           destination: pypi_package
 
+
+deploy:
+    docker:
+      - image: cimg/python:3.8.4
+    steps:
+      - checkout
       - restore_cache:
           keys:
             - pypi-package-{{ .Branch }}-{{ .Revision }}
