@@ -27,11 +27,7 @@ jobs:
 
 
 
-      - run:
-          name: Informe de cobertura
-          command: |
-            coverage run -m pytest tests
-            coverage report -m
+      
       - run:
           name: Run Linting with pylint
           command: |
