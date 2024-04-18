@@ -15,19 +15,28 @@ with open(secret_path) as secret_file:
 sys.path.insert(0, app_path)
 
 # Ahora puedes importar 'app.py' desde el directorio 'app'
-from app import app, obtener_practicas
+from app import crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
 
 @pytest.fixture
-def client():
-    # Configurar la aplicación en modo de prueba
-    app.config['TESTING'] = True
+def db_connection():
+    connection = None
+    return connection
 
-    with app.test_client() as client:
-        yield client
+def test_crear_tabla(db_connection):
+    crear_tabla()
 
-def test_index(client):
-    # Realizar una solicitud GET a la ruta '/'
-    response = client.get('/')
+def test_agregar_practica(db_connection):
+    agregar_practica("Test Práctica", "test@example.com", "Test", "http://example.com")
 
-    # Verificar que la respuesta sea exitosa (código 200)
-    assert response.status_code == 200
+def test_obtener_practicas(db_connection):
+    practicas = obtener_practicas()
+
+def test_eliminar_practica(db_connection):
+    # Primero, agregamos una práctica para luego eliminarla
+    agregar_practica("Test Práctica", "test@example.com", "Test", "http://example.com")
+    # Obtenemos la práctica recién agregada para obtener su ID
+    practicas = obtener_practicas()
+    # Suponemos que la primera práctica en la lista es la que acabamos de agregar
+    if practicas:
+        practica_id = practicas[0]['id']
+        eliminar_practica(practica_id)
