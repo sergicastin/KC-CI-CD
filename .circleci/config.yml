@@ -24,10 +24,15 @@ jobs:
           name: Copy files to /app and list contents
           command: |
             ls
-
-
-
-      
+      - run:
+          name: Run Tests
+          command: |
+            pytest tests
+      - run:
+          name: Informe de cobertura
+          command: |
+            coverage run -m pytest tests
+            coverage report -m
       - run:
           name: Run Linting with pylint
           command: |
