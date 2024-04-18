@@ -1,0 +1,32 @@
+dex:
+  enabled: false
+redis:
+  enabled: true
+redis-ha:
+  enabled: false
+repoServer:
+  serviceAccount:
+    create: true
+configs:
+  params:
+    server.insecure: true
+  cm:
+    resource.compareoptions: |
+      ignoreAggregatedRoles: true
+      ignoreResourceStatusField: all
+    url: http://localhost/argocd
+    application.instanceLabelKey: argocd.argoproj.io/instance
+global:
+  domain: ""
+server:
+  insecure: true
+  extraArgs:
+    - --rootpath
+    - /argocd
+  ingress:
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+    enabled: true
+    paths:
+      - /argocd

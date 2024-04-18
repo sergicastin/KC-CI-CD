@@ -47,13 +47,49 @@ jobs:
           name: GitGuardian Scan
           command:
             ggshield secret scan commit-range HEAD
-      - store_artifacts:
-          path: app/__pycache__
-          destination: pycache
 
+
+
+
+
+
+
+
+       # Generar paquete PyPI
+      - run:
+          name: Build PyPI Package
+          command: |
+            python setup.py sdist
+
+      # Guardar el paquete generado como artefacto
+      - store_artifacts:
+          path: dist
+          destination: pypi_package
+
+      - restore_cache:
+          keys:
+            - pypi-package-{{ .Branch }}-{{ .Revision }}
+
+      # Instalar twine para subir el paquete a PyPI
+      - run:
+          name: Install Twine
+          command: |
+            pip install twine
+
+      # Subir el paquete a PyPI
+      - run:
+          name: Upload Package to PyPI
+          command: |
+            twine upload dist/*
 
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
