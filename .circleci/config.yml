@@ -76,8 +76,7 @@ jobs:
       - run:
           name: Install Docker
           command: |
-            whoami
-            sudo usermod -aG docker ubuntu
+            sudo usermod -aG docker circleci
             sudo apt-get remove -y containerd.io
             sudo apt-get autoremove -y
             sudo apt-get update
