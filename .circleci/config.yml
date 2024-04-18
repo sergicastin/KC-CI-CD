@@ -76,8 +76,8 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            cd ..
-            docker build -t ci-cd-sergicastillo -f dockerfile CI-CD-SergiCastillo
+            cd ..            
+            docker build -t ci-cd-sergicastillo -f dockerfile .
             docker tag ci-cd-sergicastillo ci-cd-sergicastillo:latest
             docker images
 
