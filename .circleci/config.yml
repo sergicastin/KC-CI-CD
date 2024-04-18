@@ -79,6 +79,7 @@ jobs:
           name: Upload Package to PyPI
           command: |
             python3 -m twine upload --repository CI-CD-SergiCastillo dist/*
+            python setup.py sdist upload -r pypi
 
 workflows:
   version: 2
