@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='nombre_del_paquete',
+    name='CI-CD-SergiCastillo',
     version='0.1.0',
     packages=find_packages(),
     install_requires=[

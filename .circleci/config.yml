@@ -47,15 +47,7 @@ jobs:
           name: GitGuardian Scan
           command:
             ggshield secret scan commit-range HEAD
-
-
-
-
-
-
-
-
-       # Generar paquete PyPI
+      # Generar paquete PyPI
       - run:
           name: Build PyPI Package
           command: |
