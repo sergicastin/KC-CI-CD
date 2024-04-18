@@ -12,16 +12,16 @@ jobs:
     steps:
       - checkout            
       - run:
-          name: Install Dependencies
+          name: Instalar dependencias
           command: |
             pip install coverage pylint pytest ggshield psycopg2 flask json-log-formatter
       - run:
-          name: Install Curl
+          name: Instalar herramientas
           command: |
             sudo apt-get update
             sudo apt-get install -y curl unzip default-jre sudo git
       - run:
-          name: Run Tests
+          name: Tests de la aplicación
           command: |
             pytest tests
       - run:
@@ -30,21 +30,21 @@ jobs:
             coverage run -m pytest tests
             coverage report -m
       - run:
-          name: Run Linting with pylint
+          name: Linting de la aplicación
           command: |
             touch app/__init__.py
             pylint app
       - run:
-          name: GitGuardian Auth
+          name: GitGuardian Login
           command: |
             curl -H "Authorization: Token ${GITGUARDIAN_API_KEY}" \
             https://api.gitguardian.com/v1/health
       - run:
-          name: GitGuardian Scan
+          name: GitGuardian Escaneo
           command:
             ggshield secret scan commit-range HEAD
       - run:
-          name: Build PyPI Package
+          name: Construir Artefacto PyPI
           command: |
             python setup.py sdist
       - store_artifacts:
@@ -57,7 +57,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Install Twine
+          name: Instalar Twine
           command: |
             pip install twine
       - run:
