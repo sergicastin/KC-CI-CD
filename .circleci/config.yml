@@ -48,8 +48,8 @@ jobs:
           command:
             ggshield secret scan commit-range HEAD
       - store_artifacts:
-          path: coverage_report.txt
-          destination: coverage-reports
+          path: ../__pycache__
+          destination: pycache
 
 workflows:
   version: 2
