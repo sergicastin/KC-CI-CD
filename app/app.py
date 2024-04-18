@@ -13,8 +13,12 @@ time.sleep(5)
 # Configuración del logger
 log = logging.getLogger()
 log.setLevel(logging.INFO)
+
+# Obtener la ruta al directorio actual
+app_dir = os.path.abspath(os.path.dirname(__file__))
+
 # Ruta al archivo JSON
-secret_path = 'secret.json'  # Puedes ajustar la ruta según sea necesario
+secret_path = os.path.join(app_dir, 'secret.json')
 
 # Cargar las variables secretas desde el archivo JSON
 with open(secret_path) as secret_file:
