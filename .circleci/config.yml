@@ -77,10 +77,12 @@ jobs:
       - run:
           name: Subir paquete a PyPI
           command: |
-            pypi_key=$PYPI_KEY
+            set -x  # Habilitar el modo de depuración
+            pypi_key="$PYPI_KEY"
+            echo "El token de PyPI es: $PYPI_KEY"
             twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" *
             ls
-            echo "El token de PyPI es: $PYPI_KEY"
+
 
 workflows:
   version: 2
