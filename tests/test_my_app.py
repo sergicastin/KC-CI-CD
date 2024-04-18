@@ -7,7 +7,8 @@ import json
 app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'app'))
 
 # Ruta al archivo JSON dentro de la carpeta app
-secret_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'app', 'secret.json'))
+secret_path = os.path.abspath(os.path.join(app_path, 'secret.json'))
+print("Ruta al archivo secret.json:", secret_path)
 
 # Agregar el directorio 'app' al sys.path
 sys.path.insert(0, app_path)
