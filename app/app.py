@@ -21,7 +21,7 @@ app_dir = os.path.abspath(os.path.dirname(__file__))
 secret_path = os.path.join(app_dir, '..', 'tests', 'secret.json')
 
 # Cargar las variables secretas desde el archivo JSON
-with open(secret_path) as secret_file:
+with open(secret_path, encoding='utf-8') as secret_file:
     config = json.load(secret_file)
 
 # Configuración de la base de datos
