@@ -68,7 +68,7 @@ jobs:
 
   build_docker_image:
     docker:
-      - image: docker:19.03.12
+      - image: cimg/python:3.8.4
     steps:
       - checkout
       - attach_workspace:
