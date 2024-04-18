@@ -67,7 +67,7 @@ jobs:
           destination: pypi_package
 
 
-deploy:
+  deploy:
     docker:
       - image: cimg/python:3.8.4
     steps:
