@@ -76,7 +76,6 @@ jobs:
       - run:
           name: Build Docker image
           command: |    
-            systemctl start docker
             docker build -t ci-cd-sergicastillo -f dockerfile .
             docker tag ci-cd-sergicastillo ci-cd-sergicastillo:latest
             docker images
