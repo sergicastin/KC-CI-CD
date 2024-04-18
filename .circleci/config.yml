@@ -67,12 +67,19 @@ jobs:
             twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" dist/*
 
   build_docker_image:
-    docker:
-      - image: cimg/base:2022.06
+    machine:
+      image: ubuntu-2204:2022.04.2
     steps:
       - checkout
       - attach_workspace:
           at: .
+      - run:
+          name: Install Docker
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y docker.io
+            sudo usermod -aG docker $USER
+            docker --version
       - run:
           name: Build Docker image
           command: |    
