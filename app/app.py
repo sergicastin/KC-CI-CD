@@ -26,7 +26,11 @@ with open(secret_path, encoding='utf-8') as secret_file:
 
 # Configuración de la base de datos
 configuracion_bd = {
-    'dsn': config['postgres://rdbwaqch:9D7TdjSABEPEzjrMxMJtLv5kYe9jYYIY@horton.db.elephantsql.com/rdbwaqch']  # Usar la URL de conexión proporcionada
+    'host': config['host'],
+    'user': config['user'],
+    'password': config['password'],
+    'database': config['database'],
+    'port': config.get('port', 5432)  # Usar el valor predeterminado 5432 si el puerto no está definido en el archivo JSON
 }
 
 def agregar_practica(nombre, correo, categoria, link):
