@@ -21,9 +21,13 @@ jobs:
           command: |
             pip install coverage pylint pytest ggshield psycopg2 flask json-log-formatter
       - run:
-          name: Instalar herramientas
+          name: Actualizar
           command: |
             sudo apt-get update
+            sudo apt-get upgrade -y
+      - run:
+          name: Instalar herramientas
+          command: |
             sudo apt-get install -y curl unzip default-jre sudo git
       - run:
           name: Tests de la aplicación
