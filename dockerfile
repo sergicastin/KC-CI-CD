@@ -1,8 +1,8 @@
 # Usar la imagen oficial de nginx
 FROM nginx
 
-# Instalar Python, venv y libpq-dev
-RUN apt-get update && apt-get install -y python3.11-venv libpq-dev
+# Instalar Python, venv, libpq-dev y gcc
+RUN apt-get update && apt-get install -y python3.11-venv libpq-dev gcc
 
 # Crear un entorno virtual e instalar pip
 RUN python3 -m venv /app/venv && /app/venv/bin/python -m ensurepip
