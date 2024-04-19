@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python-app-deployment
+  name: ci-cd-sergicastillo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: python-app
+      app: ci-cd-sergicastillo
   template:
     metadata:
       labels:
-        app: python-app
+        app: ci-cd-sergicastillo
     spec:
       containers:
-      - name: python-app-container
+      - name: ci-cd-sergicastillo
         image: sergicasti/ci-cd-sergicastillo:latest
         ports:
-        - containerPort: 5000  # El puerto en el que tu aplicación Flask está escuchando
+        - containerPort: 5000

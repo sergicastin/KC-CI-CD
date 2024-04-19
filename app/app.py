@@ -108,3 +108,6 @@ def agregar():
 def eliminar(practica_id):
     eliminar_practica(practica_id)
     return redirect('/')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
