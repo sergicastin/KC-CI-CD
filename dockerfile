@@ -22,8 +22,8 @@ COPY . .
 # Copiar el archivo de configuración de nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Exponer el puerto 80
-EXPOSE 80
+# Exponer el puerto 8080
+EXPOSE 8080
 
 # Ejecutar app.py al iniciar el contenedor usando el intérprete de Python del entorno virtual
 CMD ["/app/venv/bin/python", "app/app.py"]
