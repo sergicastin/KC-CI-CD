@@ -2,7 +2,7 @@
 FROM nginx
 
 # Instalar Python, venv, libpq-dev y gcc
-RUN apt-get update && apt-get install -y python3.11-venv libpq-dev gcc
+RUN apt-get update && apt-get install -y python3.11-venv libpq-dev gcc python3-dev
 
 # Crear un entorno virtual e instalar pip
 RUN python3 -m venv /app/venv && /app/venv/bin/python -m ensurepip
