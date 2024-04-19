@@ -26,4 +26,4 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
 # Ejecutar app.py al iniciar el contenedor usando el intérprete de Python del entorno virtual
-CMD ["/app/venv/bin/python", "app.py"]
+CMD ["/app/venv/bin/python", "app/app.py"]
