@@ -14,11 +14,11 @@ COPY . /app
 # Etapa final
 FROM nginx:alpine
 
-# Instalar Python
-RUN apk add --no-cache python3
+# Configura el directorio de trabajo en /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
 
 # Copia los archivos estáticos desde la etapa de construcción
-COPY --from=builder /app /usr/share/nginx/html
+COPY --from=builder /app/templates .
 
 # Copia la configuración de Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
@@ -26,5 +26,5 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Exponer el puerto 80
 EXPOSE 80
 
-# Comando para iniciar la aplicación Python
-CMD ["python", "app.py"]
+# Comando para iniciar el servidor Nginx
+CMD ["nginx", "-g", "daemon off;"]
