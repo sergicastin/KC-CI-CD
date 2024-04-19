@@ -88,7 +88,7 @@ def eliminar_practica(practica_id):
             conexion.close()
 
 # Crear la tabla en la base de datos
-crear_tabla()
+#crear_tabla()
 
 @app.route('/')
 def index():
