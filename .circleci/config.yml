@@ -87,7 +87,7 @@ jobs:
           name: Build Docker image
           command: |    
             docker build -t ci-cd-sergicastillo -f dockerfile .
-            docker tag ci-cd-sergicastillo ci-cd-sergicastillo:latest
+            docker tag ci-cd-sergicastillo sergicasti/ci-cd-sergicastillo:latest
             docker images
       - run:
           name: Login to DockerHub
