@@ -1,7 +1,7 @@
 import os
-import pytest
 import sys
 import json
+import pytest
 
 # Obtener la ruta al directorio 'app' (un nivel hacia arriba desde la ubicación de este archivo)
 app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'app'))
@@ -15,15 +15,12 @@ with open(secret_path) as secret_file:
 sys.path.insert(0, app_path)
 
 # Ahora puedes importar 'app.py' desde el directorio 'app'
-from app import crear_tabla, agregar_practica, obtener_practicas, eliminar_practica
+from app import agregar_practica, obtener_practicas, eliminar_practica
 
 @pytest.fixture
 def db_connection():
     connection = None
     return connection
-
-def test_crear_tabla(db_connection):
-    crear_tabla()
 
 def test_agregar_practica(db_connection):
     agregar_practica("Test Práctica", "test@example.com", "Test", "http://example.com")
