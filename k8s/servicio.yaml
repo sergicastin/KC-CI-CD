@@ -7,6 +7,6 @@ spec:
     app: ci-cd-sergicastillo
   ports:
     - protocol: TCP
-      port: 80
+      port: 8080
       targetPort: 5000
   type: ClusterIP
