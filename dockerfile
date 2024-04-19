@@ -17,7 +17,7 @@ COPY requirements.txt .
 RUN /app/venv/bin/python -m pip install -r requirements.txt
 
 # Copiar todos los archivos de la carpeta app al contenedor
-COPY app/ .
+COPY . .
 
 # Copiar el archivo de configuración de nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
