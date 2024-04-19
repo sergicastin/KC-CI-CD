@@ -1,30 +1,23 @@
-# Etapa de construcción
-FROM python:3.8 AS builder
+# Usar la imagen oficial de nginx
+FROM nginx
 
-# Configura el directorio de trabajo en /app
+# Establecer el directorio de trabajo en /app
 WORKDIR /app
 
-# Copia el archivo de requisitos e instala las dependencias
+# Copiar el archivo de requisitos al contenedor
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia los archivos estáticos desde la etapa de construcción
-COPY . /app
+# Instalar las dependencias
+RUN apt-get update && apt-get install -y python3-pip && pip3 install -r requirements.txt
 
-# Etapa final
-FROM nginx:alpine
+# Copiar todos los archivos de la carpeta app al contenedor
+COPY app/ .
 
-# Configura el directorio de trabajo en /usr/share/nginx/html
-WORKDIR /usr/share/nginx/html
-
-# Copia los archivos estáticos desde la etapa de construcción
-COPY --from=builder /app/templates .
-
-# Copia la configuración de Nginx
+# Copiar el archivo de configuración de nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Exponer el puerto 80
 EXPOSE 80
 
-# Comando para iniciar el servidor Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Ejecutar app.py al iniciar el contenedor
+CMD ["python3", "app.py"]
