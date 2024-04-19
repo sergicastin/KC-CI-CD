@@ -14,6 +14,9 @@ COPY . /app
 # Etapa final
 FROM nginx:alpine
 
+# Instalar Python
+RUN apk add --no-cache python3
+
 # Copia los archivos estáticos desde la etapa de construcción
 COPY --from=builder /app /usr/share/nginx/html
 
