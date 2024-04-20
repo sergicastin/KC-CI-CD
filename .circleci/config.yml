@@ -53,6 +53,15 @@ jobs:
           command:
             ggshield secret scan commit-range HEAD
       - run:
+          name: Check if on main branch
+          command: |
+            if [ "$(git branch --show-current)" == "main" ]; then
+              echo "On main branch. Proceeding with building and uploading artifact."
+            else
+              echo "Not on main branch. Skipping artifact build and upload."
+              exit 0
+            fi
+      - run:
           name: Construir Artefacto PyPI
           command: |
             python setup.py sdist
