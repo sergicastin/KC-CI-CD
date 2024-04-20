@@ -51,16 +51,7 @@ jobs:
       - run:
           name: GitGuardian Escaneo
           command:
-            ggshield secret scan commit-range HEAD
-      - run:
-          name: Check if on main branch
-          command: |
-            if [ "$(git branch --show-current)" == "main" ]; then
-              echo "On main branch. Proceeding with building and uploading artifact."
-            else
-              echo "Not on main branch. Skipping artifact build and upload."
-              exit 0
-            fi
+            ggshield secret scan commit-range HEAD      
       - run:
           name: Construir Artefacto PyPI
           command: |
@@ -79,10 +70,16 @@ jobs:
           command: |
             pip install twine
       - run:
-          name: Subir paquete a PyPI
+          name: Subir artefacto solo en main
           command: |
-            pypi_key="$PYPI_KEY"
-            twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" dist/*
+            if [ "$(git branch --show-current)" == "main" ]; then
+              echo "Main detectada. Subiendo...."
+              pypi_key="$PYPI_KEY"
+              twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" dist/*
+            else
+              echo "No en Main. Saliendo."
+              exit 0
+            fi          
 
   build_docker_image:
     description: "Build Docker image"
