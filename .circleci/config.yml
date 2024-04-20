@@ -72,7 +72,7 @@ jobs:
       - run:
           name: Subir artefacto solo en main
           command: |
-            if [ "$(git branch --show-current)" == "main" ]; then
+            if [ "$(git rev-parse --abbrev-ref HEAD)" == "main" ]; then
               echo "Main detectada. Subiendo...."
               pypi_key="$PYPI_KEY"
               twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" dist/*
