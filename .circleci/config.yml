@@ -1,0 +1,107 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@2.1.1
+  sonarcloud: sonarsource/sonarcloud@2.0.0
+  ggshield: gitguardian/ggshield@1.1.4
+
+executors:
+  docker-executor:
+    docker:
+      - image: cimg/base:2023.03
+
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.8.4
+    steps:
+      - checkout            
+      - run:
+          name: Instalar dependencias
+          command: |
+            pip install coverage pylint pytest ggshield psycopg2 flask json-log-formatter
+      - run:
+          name: Actualizar
+          command: |
+            sudo apt-get update
+            sudo apt-get upgrade -y
+      - run:
+          name: Instalar herramientas
+          command: |
+            sudo apt-get install -y curl unzip default-jre sudo git
+      - run:
+          name: Tests de la aplicación
+          command: |
+            pytest tests
+      - run:
+          name: Informe de cobertura
+          command: |
+            coverage run -m pytest tests
+            coverage report -m
+      - run:
+          name: Linting de la aplicación
+          command: |
+            touch app/__init__.py
+            pylint app
+      - run:
+          name: GitGuardian Login
+          command: |
+            curl -H "Authorization: Token ${GITGUARDIAN_API_KEY}" \
+            https://api.gitguardian.com/v1/health
+      - run:
+          name: GitGuardian Escaneo
+          command:
+            ggshield secret scan commit-range HEAD
+      - run:
+          name: Construir Artefacto PyPI
+          command: |
+            python setup.py sdist
+      - store_artifacts:
+          path: dist
+          destination: pypi_package
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+      - attach_workspace:
+          at: .
+      - run:
+          name: Instalar Twine
+          command: |
+            pip install twine
+      - run:
+          name: Subir paquete a PyPI
+          command: |
+            pypi_key="$PYPI_KEY"
+            twine upload --repository-url https://upload.pypi.org/legacy/ --username __token__ --password "$pypi_key" dist/*
+
+  build_docker_image:
+    description: "Build Docker image"
+    executor: docker-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build Docker image
+          command: |    
+            docker build -t ci-cd-sergicastillo -f dockerfile .
+            docker tag ci-cd-sergicastillo sergicasti/ci-cd-sergicastillo:latest
+            docker images
+      - run:
+          name: Login to DockerHub
+          command: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run:
+          name: Push Docker image
+          command: |
+            docker push sergicasti/ci-cd-sergicastillo:latest
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - build_docker_image:
+          requires:
+            - build

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ci-cd-sergicastillo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ci-cd-sergicastillo
+  template:
+    metadata:
+      labels:
+        app: ci-cd-sergicastillo
+    spec:
+      containers:
+      - name: ci-cd-sergicastillo
+        image: sergicasti/ci-cd-sergicastillo:latest
+        ports:
+        - containerPort: 5000

@@ -1,0 +1,9 @@
+[MASTER]
+
+# Definir las advertencias que quieres ignorar
+disable=line-too-long,missing-module-docstring,missing-function-docstring,broad-exception-caught,wrong-import-order
+
+[MESSAGES CONTROL]
+
+# Personalizar niveles de severidad para advertencias específicas
+disable=logging-format-interpolation
