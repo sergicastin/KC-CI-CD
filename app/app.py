@@ -30,7 +30,8 @@ configuracion_bd = {
     'user': config['user'],
     'password': config['password'],
     'database': config['database'],
-    'port': config.get('port', 5432)  # Usar el valor predeterminado 5432 si el puerto no está definido en el archivo JSON
+    'port': config.get('port', 5432),  # Usar el valor predeterminado 5432 si el puerto no está definido en el archivo JSON
+    'sslmode': 'require'  # Establecer SSL mode en require para usar SSL
 }
 
 def agregar_practica(nombre, correo, categoria, link):
