@@ -30,9 +30,22 @@ configuracion_bd = {
     'user': config['user'],
     'password': config['password'],
     'database': config['database'],
-    'port': config.get('port', 5432),  # Usar el valor predeterminado 5432 si el puerto no está definido en el archivo JSON
-    'sslmode': 'require'  # Establecer SSL mode en require para usar SSL
+    'port': config.get('port', 26257),  # Usar el valor predeterminado 26257 si el puerto no está definido en el archivo JSON
+    'sslmode': 'verify-full'  # Establecer SSL mode en verify-full para usar SSL
 }
+
+def crear_tabla():
+    try:
+        conexion = psycopg2.connect(**configuracion_bd)
+        cursor = conexion.cursor()
+        cursor.execute("CREATE TABLE IF NOT EXISTS practicas (id SERIAL PRIMARY KEY, nombre VARCHAR(255), correo VARCHAR(255), categoria VARCHAR(255), link VARCHAR(255))")
+        conexion.commit()
+        log.info("Tabla creada correctamente")
+    except Exception as e:
+        log.error({"message": f"Error al crear la tabla: {e}"})
+    finally:
+        if 'conexion' in locals():
+            conexion.close()
 
 def agregar_practica(nombre, correo, categoria, link):
     try:
@@ -73,6 +86,9 @@ def eliminar_practica(practica_id):
     finally:
         if 'conexion' in locals():
             conexion.close()
+            
+# Crear la tabla en la base de datos al iniciar la aplicación
+crear_tabla()
 
 @app.route('/')
 def index():
