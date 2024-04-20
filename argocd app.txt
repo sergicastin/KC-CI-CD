@@ -1,1 +1,0 @@
-argocd app create cicdsergi --repo https://github.com/sergicastin/CI-CD-SergiCastillo --path k8s --dest-server https://kubernetes.default.svc --dest-namespace default --sync-policy automated --self-heal --auto-prune
