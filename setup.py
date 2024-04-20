@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 
 # Obtener la versión actual del paquete
-version = '0.2.6'
+version = '0.2.7'
 
 # Eliminar el archivo .tar.gz existente si ya está presente
 if os.path.exists(f"dist/CI-CD-SergiCastillo-{version}.tar.gz"):
