@@ -1,7 +1,16 @@
+import os
 from setuptools import setup, find_packages
+
+# Obtener la versión actual del paquete
+version = '0.2.3'
+
+# Eliminar el archivo .tar.gz existente si ya está presente
+if os.path.exists(f"dist/CI-CD-SergiCastillo-{version}.tar.gz"):
+    os.remove(f"dist/CI-CD-SergiCastillo-{version}.tar.gz")
 
 setup(
     name='CI-CD-SergiCastillo',
+    version=version,
     packages=find_packages(),
     install_requires=[
         'coverage',
@@ -12,7 +21,6 @@ setup(
         'flask',
         'json-log-formatter',
         'twine'
-              
     ],
     author='Sergi Castillo',
     description='KeepCoding',
