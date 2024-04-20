@@ -2,7 +2,6 @@ from setuptools import setup, find_packages
 
 setup(
     name='CI-CD-SergiCastillo',
-    version='latest',
     packages=find_packages(),
     install_requires=[
         'coverage',
